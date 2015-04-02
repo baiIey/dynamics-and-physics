@@ -38,9 +38,9 @@ class SnowViewController: UIViewController, UICollisionBehaviorDelegate {
 //        collision.translatesReferenceBoundsIntoBoundary = true // You can set the bounds of the view to automatically be boundaries by setting the translatesReferenceBoundsIntoBoundaries property.
 
 
-        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "blueTimer", userInfo: nil, repeats: true)
-//        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "redTimer", userInfo: nil, repeats: true)
-//        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "blackTimer", userInfo: nil, repeats: true)
+        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "blueTimer", userInfo: nil, repeats: true) // schedule blue blocks
+        NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "redTimer", userInfo: nil, repeats: true) // schedule red blocks
+        NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: "blackTimer", userInfo: nil, repeats: true) // schedule black blocks
         
         frameWidth = UInt32(self.view.frame.width) // converts float to integer
         frameHeight = UInt32(self.view.frame.height)
@@ -58,7 +58,8 @@ class SnowViewController: UIViewController, UICollisionBehaviorDelegate {
         y = arc4random_uniform(0)
         
         blueSnow = UIView(frame: CGRectMake(CGFloat(x), CGFloat(y), 10, 10))
-        blueSnow.backgroundColor = UIColor.blueColor()
+//        blueSnow.backgroundColor = UIColor(red: 224/255, green: 224/255, blue: 224/255, alpha: 1.0) // soft white
+        blueSnow.backgroundColor = UIColor(red: 169/255, green: 228/255, blue: 227/255, alpha: 0.8) // soft blue
         
         view.addSubview(blueSnow)
         
@@ -78,7 +79,7 @@ class SnowViewController: UIViewController, UICollisionBehaviorDelegate {
         y = arc4random_uniform(0)
         
         redSnow = UIView(frame: CGRectMake(CGFloat(x), CGFloat(y), 10, 10))
-        redSnow.backgroundColor = UIColor.redColor()
+        redSnow.backgroundColor = UIColor(red: 227/255, green: 168/255, blue: 198/255, alpha: 0.8) // soft red
         
         view.addSubview(redSnow)
         gravity.addItem(redSnow) // add physics to items
@@ -96,7 +97,7 @@ class SnowViewController: UIViewController, UICollisionBehaviorDelegate {
         y = arc4random_uniform(0)
         
         blackSnow = UIView(frame: CGRectMake(CGFloat(x), CGFloat(y), 50, 50))
-        blackSnow.backgroundColor = UIColor.blackColor()
+        blackSnow.backgroundColor = UIColor(red: 28/255, green: 28/255, blue: 28/255, alpha: 0.8) // soft black
         
         view.addSubview(blackSnow)
         gravity.addItem(blackSnow) // add physics to items
@@ -112,13 +113,30 @@ class SnowViewController: UIViewController, UICollisionBehaviorDelegate {
         var boundary = identifier as String // You have to convert the identifier to a string
         var view = item as UIView // The view that collided with the boundary has to be converted to a view
         
-        if boundary == "ground" {
-            // Detected collision with a boundary called "ground"
+        if boundary == "ground" { // Detected collision with a boundary called "ground"
             println("hit ground")
-        } else if (boundary == "") {
-            // Detected collision with bounds of reference view
+            delay(0.2, closure: { () -> () in // When the snow view hits the ground boundary, schedule the meltSnow method to run after 0.2 seconds and pass the snow view into the method.
+//                self.meltSnow()
+            })
+        } else if (boundary == "") { // Detected collision with bounds of reference view
+            
             println("hit something")
         }
+    }
+    
+    func meltSnow(view: UIView!) {
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+//            self.collision.removeItem(self.UIView)
+        })
+    }
+    
+    func delay(delay:Double, closure:()->()) { // Calling a Method after Delay
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
     }
 
     /*
