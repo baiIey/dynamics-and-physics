@@ -110,13 +110,13 @@ class SnowViewController: UIViewController, UICollisionBehaviorDelegate {
     }
     
     func collisionBehavior(behavior: UICollisionBehavior, beganContactForItem item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying, atPoint p: CGPoint) {
-        var boundary = identifier as String // You have to convert the identifier to a string
-        var view = item as UIView // The view that collided with the boundary has to be converted to a view
+        var boundary = identifier as! String // You have to convert the identifier to a string
+        var view = item as! UIView // The view that collided with the boundary has to be converted to a view
         
         if boundary == "ground" { // Detected collision with a boundary called "ground"
             println("hit ground")
             delay(0.2, closure: { () -> () in // When the snow view hits the ground boundary, schedule the meltSnow method to run after 0.2 seconds and pass the snow view into the method.
-//                self.meltSnow()
+//                self.meltSnow(view)
             })
         } else if (boundary == "") { // Detected collision with bounds of reference view
             
@@ -125,8 +125,8 @@ class SnowViewController: UIViewController, UICollisionBehaviorDelegate {
     }
     
     func meltSnow(view: UIView!) {
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
-//            self.collision.removeItem(self.UIView)
+        UIView.animateWithDuration(1, animations: { () -> Void in
+            self.collision.removeItem(view)
         })
     }
     

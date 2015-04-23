@@ -161,9 +161,11 @@
 				TargetAttributes = {
 					D4118DED1AC241B80019AF9F = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = Q5TF9QFS23;
 					};
 					D4118E021AC241B80019AF9F = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = Q5TF9QFS23;
 						TestTargetID = D4118DED1AC241B80019AF9F;
 					};
 				};
@@ -358,6 +360,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -369,6 +373,7 @@
 				INFOPLIST_FILE = "Snow FallTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Snow Fall.app/Snow Fall";
 			};
 			name = Debug;
@@ -377,6 +382,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -384,6 +391,7 @@
 				INFOPLIST_FILE = "Snow FallTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Snow Fall.app/Snow Fall";
 			};
 			name = Release;
@@ -407,6 +415,7 @@
 				D4118E0F1AC241B80019AF9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D4118E101AC241B80019AF9F /* Build configuration list for PBXNativeTarget "Snow FallTests" */ = {
 			isa = XCConfigurationList;
@@ -415,6 +424,7 @@
 				D4118E121AC241B80019AF9F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
